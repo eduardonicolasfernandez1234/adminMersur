@@ -1,0 +1,132 @@
+<div class="carta">
+  <app-header-form titulo="LISTA DE CLIENTES"></app-header-form>
+
+  <div class="content-table">
+    <div class="busqueda">
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5%" fxLayout.sm="column">
+          <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+              <!-- <label>Cliente:</label> -->
+              <ng-autocomplete class="form-div w-100" [data]="lista_cliente_corta"
+                  [searchKeyword]="'razon_social'" [itemTemplate]="itemTemplate"
+                  [notFoundTemplate]="notFoundTemplate" (selected)='selectEvent($event, CLIENTE_RAZON)'
+                  (inputCleared)='onClear($event, CLIENTE_RAZON)'
+                  (inputChanged)='onChangeSearch($event, CLIENTE_RAZON)'
+                  placeholder="Seleccionar Razón Social">
+              </ng-autocomplete>
+
+              <ng-template #itemTemplate let-item>
+                  <a [innerHTML]="item.razon_social"></a>
+              </ng-template>
+
+              <ng-template #notFoundTemplate let-notFound>
+                  <div [innerHTML]="notFound"></div>
+              </ng-template>
+          </div>
+
+          <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+              <!-- <label>Liquidador:</label> -->
+              <ng-autocomplete class="form-div w-100" [data]="lista_cliente_corta"
+                  [searchKeyword]="'identificacion_tributaria'" [itemTemplate]="itemTemplate2"
+                  [notFoundTemplate]="notFoundTemplate2" (selected)='selectEvent($event, CLIENTE_NIT)'
+                  (inputCleared)='onClear($event, CLIENTE_NIT)'
+                  (inputChanged)='onChangeSearch($event, CLIENTE_NIT)' placeholder="Seleccionar Nit">
+              </ng-autocomplete>
+
+              <ng-template #itemTemplate2 let-item>
+                  <a [innerHTML]="item.identificacion_tributaria"></a>
+              </ng-template>
+
+              <ng-template #notFoundTemplate2 let-notFound>
+                  <div [innerHTML]="notFound"></div>
+              </ng-template>
+          </div>
+
+          <div class="form-div" fxLayout="column" fxLayoutAlign="space-between start">
+              <button (click)="buscador(1)" type="button" class="boton"> Buscar</button>
+          </div>
+
+      </div>
+  </div>
+  
+    <table mat-table [dataSource]="dataSource" mat-sort multiTemplateDataRows class="mat-elevation-z8">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Id Cliente</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="razon_social">
+        <th mat-header-cell *matHeaderCellDef>Razón Social</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.razon_social }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="identificacion_tributaria">
+        <th mat-header-cell *matHeaderCellDef>Id Tributaria</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.identificacion_tributaria }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="representante_legal">
+        <th mat-header-cell *matHeaderCellDef>Representante Legal</th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.representante_legal">{{
+            element.representante_legal
+            }}</span>
+          <span *ngIf="element.representante_legal == null">Sin Asignar</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="referencia_comercial">
+        <th mat-header-cell *matHeaderCellDef>Referencia Comercial</th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.referencia_comercial">{{
+            element.referencia_comercial
+            }}</span>
+          <span *ngIf="element.referencia_comercial == null">Sin Asignar</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="certificaciones">
+        <th mat-header-cell *matHeaderCellDef>Certificaciones</th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.certificaciones">{{
+            element.certificaciones
+            }}</span>
+          <span *ngIf="element.certificaciones == null">Sin Asignar</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="created_at">
+        <th mat-header-cell *matHeaderCellDef>Fecha Registro</th>
+        <td mat-cell *matCellDef="let element">
+          {{ momentService.obtenerFormatoFecha(element.created_at.toString()) }}
+        </td>
+      </ng-container>
+
+      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+          <div class="detail" [@detailExpand]="
+              element == expandedElement ? 'expanded' : 'collapsed'
+            ">
+            <div class="example-element-description w-100">
+              <!-- Componente de informacion -->
+              <mat-divider></mat-divider>
+              <information-table-cliente *ngIf="element == expandedElement" [Cliente]="cliente_info">
+              </information-table-cliente>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let element; columns: columnsToDisplay" class="example-element-row"
+        [class.example-expanded-row]="expandedElement === element" (click)="expandible(element)"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    </table>
+    <mat-paginator [length]="lengthTable" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"
+      (page)="pageEvent = $event; onPaginateChange($event)" showFirstLastButtons></mat-paginator>
+  </div>
+</div>

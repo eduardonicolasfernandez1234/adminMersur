@@ -1,0 +1,58 @@
+<mat-card>
+    <mat-card-header>
+        <button class="boton btn-compartir" mat-raised-button [matMenuTriggerFor]="exportar">Compartir</button>
+        <mat-menu #exportar="matMenu" yPosition="above">
+        <button mat-menu-item>Compartir Email</button>
+        <button mat-menu-item>Compartir Mensaje</button>
+        </mat-menu>
+        <button class="boton btn-exportar" mat-raised-button>Exportar PDF</button>
+    </mat-card-header>
+    <mat-card-content>
+        <table class="table table-hover table-sm table-bordered">
+            <thead>
+                <tr class="table-active">
+                    <th scope="col" colspan="3">DETALLE DEL USARIO</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Id Usuario</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Dirección</th>
+                </tr>
+                <tr>
+                    <td *ngIf="usuario.id">{{ usuario.id }}</td>
+                    <td *ngIf="usuario.estado == true">Habilitado</td>
+                    <td *ngIf="usuario.estado == false">Deshabilitado</td>
+                    <td *ngIf="usuario.username == null">Sin Asignar</td>
+                    <td *ngIf="usuario.username">{{ usuario.username }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Tipo Usuario</th>
+                    <th scope="col">Ciudad</th>
+                    <th scope="col">Pais</th>
+                </tr>
+                <tr>
+                    <td *ngIf="usuario.tipo_usuario">{{ obtenerTipoUsuario(usuario.tipo_usuario) }}</td>
+                    <td *ngIf="usuario.ciudad.nombre">{{usuario.ciudad.nombre}}</td>
+                    <td *ngIf="usuario.ciudad == null">Sin Asignar</td>
+                    <td *ngIf="usuario.ciudad.pais.nombre">{{ usuario.ciudad.pais.nombre }}</td>
+                    <td *ngIf="usuario.ciudad.pais == null">Sin Asignar</td>
+                </tr>
+                <tr class="table-active">
+                    <th scope="col" colspan="3">INFORMACIÓN NOTIFICACIONES</th>
+                </tr>
+                <tr>
+                    <th colspan="2" scope="row">Notificación Email</th>
+                    <td *ngIf="usuario.envio_email == true">Si</td>
+                    <td *ngIf="usuario.envio_email == false || usuario.envio_email == null">No</td>
+                </tr>
+                <tr>
+                    <th colspan="2" scope="row">Notificación FCM</th>
+                    <td *ngIf="usuario.envio_fcm == true">Si</td>
+                    <td *ngIf="usuario.envio_fcm == false || usuario.envio_fcm == null">No</td>
+                </tr>
+            </tbody>
+        </table>
+    </mat-card-content>
+</mat-card>

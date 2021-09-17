@@ -1,0 +1,128 @@
+<div class="opciones" *ngIf="edicion">
+    <button matTooltip="Exportar" [ngClass]="{'btn-exportar': edicion == true}" mat-icon-button class="boton">
+        <mat-icon>archive</mat-icon>
+    </button>
+    <button matTooltip="Eliminar" (click)="eliminar()" [ngClass]="{'btn-eliminar': edicion == true}" mat-icon-button class="boton">
+        <mat-icon>delete</mat-icon>
+    </button>
+
+    <button matTooltip="Editar" (click)="actualizar()" [ngClass]="{'btn-editar': edicion == true}" mat-icon-button class="boton">
+        <mat-icon>create</mat-icon>
+    </button>
+</div>
+
+<div *ngIf="comision.tipo == SIMPLE">
+    <table class="table table-hover table-sm table-bordered">
+        <thead>
+            <tr [ngClass]="{'cabecera-tabla-editar': edicion == true}" class="table-active">
+                <th [ngClass]="{'btn-editar': edicion == true}" scope="col" colspan="3">ESCALA DE COMISIÓN</th>
+            </tr>
+        </thead>
+        <tbody>
+            <table class="table table-hover table-sm table-bordered table-child">
+                <tbody>
+                    <!-- <tr [ngClass]="{'tabla-editar': edicion == true}">
+                        <th colspan="2" scope="col">Tipo Comisiòn</th>
+                        <td colspan="2" *ngIf="comision != null">{{ obtenerTipoComision(comision.tipo) }}</td>
+                        <td colspan="2" *ngIf="comision == null">Sin datos</td>
+                    </tr> -->
+                    <tr [ngClass]="{'tabla-editar': edicion == true}">
+                        <th colspan="2" scope="col">Tipo Mercaderia</th>
+                        <td colspan="2" *ngIf="comision != null">{{ nombre_mercaderia }}</td>
+                        <td colspan="2" *ngIf="comision == null">Sin datos</td>
+                    </tr>
+                    <tr [ngClass]="{'tabla-editar': edicion == true}">
+                        <th colspan="2" scope="col">Comisión mínima</th>
+                        <td colspan="2" scope="col" *ngIf="comision != null">{{ comision.comision_minima + obtenerTipoMonedaComisionCostoAbbr(comision.moneda_comision)}}</td>
+                        <td colspan="2" *ngIf="comision == null">Sin datos</td>
+                    </tr>
+                    <tr [ngClass]="{'tabla-editar': edicion == true}">
+                        <th colspan="2" scope="col">Tarifa fija</th>
+                        <td colspan="2" scope="col" *ngIf="comision != null">{{ comision.tarifa_minima + obtenerTipoMonedaComisionCostoAbbr(comision.moneda_costo0)}}</td>
+                        <td colspan="2" *ngIf="comision == null">Sin datos</td>
+                    </tr>
+                </tbody>
+            </table>
+        </tbody>
+    </table>
+</div>
+<div *ngIf="comision.tipo == COMPLETO">
+    <table class="table table-hover table-sm table-bordered">
+        <thead>
+            <tr [ngClass]="{'cabecera-tabla-editar': edicion == true}" class="table-active">
+                <th [ngClass]="{'btn-editar': edicion == true}" scope="col" colspan="3">ESCALA DE COMISIÓN</th>
+            </tr>
+        </thead>
+        <tbody>
+            <table class="table table-hover table-sm table-bordered table-child">
+                <tbody>
+                    <tr [ngClass]="{'tabla-editar': edicion == true}">
+                        <th colspan="2" scope="col">Tipo Mercaderia</th>
+                        <td colspan="2" *ngIf="comision != null">{{ nombre_mercaderia }}</td>
+                        <td colspan="2" *ngIf="comision == null">Sin datos</td>
+                    </tr>
+                    <tr [ngClass]="{'tabla-editar': edicion == true}">
+                        <th colspan="2" scope="col">Tipo Comisiòn</th>
+                        <td colspan="2" *ngIf="comision.tipo != null">{{ obtenerTipoComision(comision.tipo) }}</td>
+                        <td colspan="2" *ngIf="comision.tipo == null">Sin datos</td>
+                    </tr>
+                    <tr [ngClass]="{'tabla-editar': edicion == true}">
+                        <th colspan="3" scope="col">Comisión sobre valor cif</th>
+                        <th scope="col">Costo</th>
+                    </tr>
+                    <tr [ngClass]="{'tabla-editar': edicion == true}">
+                        <td colspan="3" *ngIf="comision != null">
+                            {{ comision.comision_cif_inicial1 + " " + obtenerTipoMonedaComisionAbbr(comision.moneda_comision) + "\t-\t" + comision.comision_cif_final1 + " " + obtenerTipoMonedaComisionAbbr(comision.tipo)}}
+                        </td>
+                        <td colspan="3" *ngIf="comision == null">Sin datos</td>
+                        <td *ngIf="comision != null">{{ comision.costo_comision1 + " " + obtenerTipoMonedaComisionCostoAbbr(comision.moneda_costo1) }}</td>
+                        <td *ngIf="comision == null">Sin datos</td>
+                    </tr>
+                    <tr [ngClass]="{'tabla-editar': edicion == true}">
+                        <td colspan="3" *ngIf="comision != null">
+                            {{ comision.comision_cif_inicial2 + " " + obtenerTipoMonedaComisionAbbr(comision.moneda_comision) + "\t-\t" + comision.comision_cif_final2 + " " + obtenerTipoMonedaComisionAbbr(comision.tipo)}}
+                        </td>
+                        <td colspan="3" *ngIf="comision == null">Sin datos</td>
+                        <td *ngIf="comision != null">{{ comision.costo_comision2 + " " + obtenerTipoMonedaComisionCostoAbbr(comision.moneda_costo2) }}</td>
+                        <td *ngIf="comision == null">Sin datos</td>
+                    </tr>
+                    <tr [ngClass]="{'tabla-editar': edicion == true}">
+                        <td colspan="3" *ngIf="comision != null">
+                            {{ comision.comision_cif_inicial3 + " " + obtenerTipoMonedaComisionAbbr(comision.moneda_comision) + "\t-\t" + comision.comision_cif_final3 + " " + obtenerTipoMonedaComisionAbbr(comision.tipo)}}
+                        </td>
+                        <td colspan="3" *ngIf="comision == null">Sin datos</td>
+                        <td *ngIf="comision != null">{{ comision.costo_comision3 + " " + obtenerTipoMonedaComisionCostoAbbr(comision.moneda_costo3) }}</td>
+                        <td *ngIf="comision == null">Sin datos</td>
+                    </tr>
+                    <tr [ngClass]="{'tabla-editar': edicion == true}">
+                        <td colspan="3" *ngIf="comision != null">
+                            {{ comision.comision_cif_inicial4 + " " + obtenerTipoMonedaComisionAbbr(comision.moneda_comision) + "\t-\t" + comision.comision_cif_final4 + " " + obtenerTipoMonedaComisionAbbr(comision.tipo)}}
+                        </td>
+                        <td colspan="3" *ngIf="comision == null">Sin datos</td>
+                        <td *ngIf="comision != null">{{ comision.costo_comision4 + " " + obtenerTipoMonedaComisionCostoAbbr(comision.moneda_costo4) }}</td>
+                        <td *ngIf="comision == null">Sin datos</td>
+                    </tr>
+                    <tr [ngClass]="{'tabla-editar': edicion == true}">
+                        <td colspan="3" *ngIf="comision != null">
+                            {{ comision.comision_cif_inicial5 + " " + obtenerTipoMonedaComisionAbbr(comision.moneda_comision) + "\t-\t" + comision.comision_cif_final5 + " " + obtenerTipoMonedaComisionAbbr(comision.tipo)}}
+                        </td>
+                        <td colspan="3" *ngIf="comision == null">Sin datos</td>
+                        <td *ngIf="comision != null">{{ comision.costo_comision5 + " " + obtenerTipoMonedaComisionCostoAbbr(comision.moneda_costo5) }}</td>
+                        <td *ngIf="comision == null">Sin datos</td>
+                    </tr>
+                    <tr [ngClass]="{'tabla-editar': edicion == true}">
+                        <td colspan="3" *ngIf="comision != null">
+                            {{ comision.comision_cif_inicial6 + " " + obtenerTipoMonedaComisionAbbr(comision.moneda_comision) + "\t-\t" + " Adelante" + " " + obtenerTipoMonedaComisionAbbr(comision.tipo)}}
+                        </td>
+                        <td colspan="3" *ngIf="comision == null">Sin datos</td>
+                        <td *ngIf="comision != null">{{ comision.costo_comision6 + " " + obtenerTipoMonedaComisionCostoAbbr(comision.moneda_costo6) }}</td>
+                        <td *ngIf="comision == null">Sin datos</td>
+                    </tr>
+                </tbody>
+            </table>
+        </tbody>
+    </table>
+</div>
+
+
+<!-- <td>{{ momentService.obtenerFormatoFecha(comision.updated_at.toString()) }}</td> -->

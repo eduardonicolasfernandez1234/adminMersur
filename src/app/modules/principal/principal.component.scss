@@ -1,0 +1,53 @@
+:host{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+mat-drawer-container{
+  height: 100%;
+  width: 100%;
+}
+
+mat-drawer-content{
+  padding: 20px;
+  padding-right: 0px;
+}
+
+mat-icon {
+  width: 25px !important;
+  height: 25px !important;
+  font-size: 25px !important;
+  cursor: pointer;
+}
+
+#fabicon{
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  z-index: 1;
+}
+
+#sidebar-btn{
+  min-height: 188px;
+}
+
+.contenedor{
+  min-height: 100vh;
+  width: 100%;
+}
+
+.icon-content:hover{
+  background-color: #d8d9da;
+  color: #41a62b;
+}
+
+.seleccion{
+  background-color: rgba($color: #000000, $alpha: 0.1);
+}
+
+.seleccion-txt{
+  color: #41a62b;
+}
+
+

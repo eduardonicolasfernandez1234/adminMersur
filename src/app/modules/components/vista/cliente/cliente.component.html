@@ -1,0 +1,104 @@
+<mat-card>
+    <mat-card-header>
+        <button class="boton btn-compartir" mat-raised-button [matMenuTriggerFor]="exportar">Compartir</button>
+        <mat-menu #exportar="matMenu" yPosition="above">
+        <button mat-menu-item>Compartir Email</button>
+        <button mat-menu-item>Compartir Mensaje</button>
+        </mat-menu>
+        <button class="boton btn-exportar" mat-raised-button>Exportar PDF</button>
+        <button (click)="actualizar()" class="boton btn-edicion" mat-raised-button>Editar</button>
+    </mat-card-header>
+    <mat-card-content>
+        <table class="table table-hover table-sm table-bordered">
+            <thead>
+                <tr class="table-active">
+                    <th scope="col" colspan="3">DETALLE DEL CLIENTE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Id</th>
+                    <th scope="col">Razón Social</th>
+                    <th scope="col">Id tributaria</th>
+                </tr>
+                <tr>
+                    <td *ngIf="cliente.id">{{ cliente.id}}</td>
+                    <td *ngIf="cliente.id == null">Sin datos</td>
+                    <td *ngIf="cliente.razon_social">{{ cliente.razon_social }}</td>
+                    <td *ngIf="cliente.razon_social == null">Sin datos</td>
+                    <td *ngIf="cliente.identificacion_tributaria">{{ cliente.identificacion_tributaria}}</td>
+                    <td *ngIf="cliente.identificacion_tributaria == null">Sin datos</td>
+                </tr>
+                <tr>
+                    <th scope="col">Representante Legal</th>
+                    <th scope="col">Habilitado</th>
+                    <th scope="col">Dirección</th>
+                </tr>
+                <tr>
+                    <td *ngIf="cliente.representante_legal">{{ cliente.representante_legal }}</td>
+                    <td *ngIf="cliente.representante_legal == null">Sin datos</td>
+                    <td *ngIf="cliente.usuario.estado == true">Si</td>
+                    <td *ngIf="cliente.usuario.estado == false">No</td>
+                    <td *ngIf="cliente.usuario.direccion">{{ cliente.usuario.direccion }}</td>
+                    <td *ngIf="cliente.usuario.direccion == null">Sin datos</td>
+                </tr>
+                <!-- <tr class="table-active">
+                    <th scope="col" colspan="3">INFORMACIÓN COMPLEMENTARIA I</th>
+                </tr> -->
+                <!-- <tr>
+                    <th colspan="2" scope="row">Documentación</th>
+                    <td *ngIf="cliente.usuario.documento_usuario">Si</td>
+                    <td *ngIf="cliente.usuario.documento_usuario == null">Documentación pendiente</td>
+                    <td>MODIFICAR</td>
+                </tr> -->
+                <tr class="table-active">
+                    <th scope="col" colspan="3">INFORMACIÓN COMPLEMENTARIA</th>
+                </tr>
+                <tr>
+                    <th scope="col">Referencia Comercial</th>
+                    <th scope="row">Certificaciones</th>
+                    <th scope="col">Productos de Importación</th>
+                </tr>
+                <tr>
+                    <td *ngIf="cliente.referencia_comercial">{{ cliente.referencia_comercial }}</td>
+                    <td *ngIf="cliente.referencia_comercial == null">Sin datos</td>
+                    <td *ngIf="cliente.certificaciones">{{ cliente.certificaciones }}</td>
+                    <td *ngIf="cliente.certificaciones == null">Sin datos</td>
+                    <td *ngIf="cliente.productos_importacion">{{ cliente.productos_importacion }}</td>
+                    <td *ngIf="cliente.productos_importacion == null">Sin datos</td>
+                </tr>
+                <tr>
+                    <th scope="col">Origen de Importación</th>
+                    <th scope="col">Proveedores Logisticos</th>
+                    <th scope="col">Resultado CNAT</th>
+                </tr>
+                <tr>
+
+                    <td *ngIf="cliente.origen_importacion">{{ cliente.origen_importacion }}</td>
+                    <td *ngIf="cliente.origen_importacion == null">Sin datos</td>
+                    <td *ngIf="cliente.proveedores_logisticos">{{ cliente.proveedores_logisticos }}</td>
+                    <td *ngIf="cliente.proveedores_logisticos == null">Sin datos</td>
+                    <td *ngIf="cliente.resultado_cnat">{{ cliente.resultado_cnat }}</td>
+                    <td *ngIf="cliente.resultado_cnat == null">Sin datos</td>
+                </tr>
+                <!--<tr class="table-active">
+                    <th scope="col" colspan="3">INFORMACIÓN USARIO</th>
+                </tr>
+                <tr>
+                    <th scope="col">Nombre de usuario</th>
+                    <th scope="col">Ciudad</th>
+                    <th scope="col">Tipo Usuario</th>
+                </tr>
+                <tr>
+                    <td>{{ cliente.usuario.username }}</td>
+                    <td>{{ cliente.usuario.ciudad.nombre }}</td>
+                    <td>Cliente</td>
+                </tr>
+                <tr>
+                    <th colspan="2" scope="col">Fecha de actualización</th>
+                    <td>{{ momentService.obtenerFormatoFecha(cliente.updated_at.toString()) }}</td>
+                </tr>-->
+            </tbody>
+        </table>
+    </mat-card-content>
+</mat-card>

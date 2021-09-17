@@ -1,0 +1,64 @@
+<mat-card>
+    <app-header-form *ngIf="data.estado == 1" titulo="REGISTRAR DOCUMENTO"></app-header-form>
+    <app-header-form *ngIf="data.estado == 2" titulo="ACTUALIZAR DOCUMENTO"></app-header-form>
+    <app-header-form *ngIf="data.estado == 3" titulo="REPLICAR DOCUMENTO"></app-header-form>
+    <form [formGroup]="registro" #formDirective="ngForm" (submit)="actualizar()" class="card mt-4">
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5%" fxLayout.sm="column">
+            <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+                <label>Tipo documento:</label>
+                <select class="w-100" formControlName="tipo"
+                    [ngClass]="registro.get('tipo').touched && !registro.get('tipo').valid ? 'is-invalid' : ''">
+                    <option disabled selected value="">Seleccionar tipo</option>
+                    <option value="1">Nit</option>
+                    <option value="2">Fundempresa</option>
+                    <option value="3">Resolución administrativa</option>
+                    <option value="4">Matrícula</option>
+                    <option value="5">Otros</option>
+                </select>
+                <div class="invalid-feedback">El campo Tipo documento es requerido.</div>
+            </div>
+            <div *ngIf="registro.get('tipo').value == 5" class="form-div w-100" fxLayout="column"
+                fxLayoutAlign="space-between start">
+                <label>Valor:</label>
+                <input type="text" class="form-control" placeholder="Descripción" formControlName="valor"
+                    [ngClass]="registro.get('valor').touched && !registro.get('valor').valid ? 'is-invalid' : ''" />
+                <div class="invalid-feedback">El campo Valor es requerido.</div>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5%" fxLayout.sm="column">
+            <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+                <label>Fecha de vencimiento del documento:</label>
+                <input type="date" class="form-control" placeholder="Ingersar referencia"
+                    formControlName="fecha_documento"
+                    [ngClass]="registro.get('fecha_documento').touched && !registro.get('fecha_documento').valid ? 'is-invalid' : ''" />
+                <div class="invalid-feedback">El campo Fecha es requerido.</div>
+            </div>
+        </div>
+
+        <div class="separador"></div>
+
+        <h2 class="subtitulo my-3">Información complementaria I</h2>
+        <div class="card mb-5 mt-2">
+            <p class="mb-3">
+                Adjuntar en PDF el NIT, Fundempresa, C.I del representante legal,
+                Poder del representante:
+            </p>
+            <ngx-dropzone (change)="onSelect($event)">
+                <ngx-dropzone-label>¡Suba sus documentos aquí!</ngx-dropzone-label>
+                <ngx-dropzone-preview *ngIf="file" [removable]="true" (removed)="onRemove(file)">
+                    <ngx-dropzone-label>{{ file.name }}</ngx-dropzone-label>
+                </ngx-dropzone-preview>
+            </ngx-dropzone>
+        </div>
+
+        <div class="separador"></div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <button *ngIf="data.estado == 1" type="button" (click)="registrar()" [disabled]="!registro.valid"
+                class="boton">Registrar Documento</button>
+            <button *ngIf="data.estado == 2" type="button" (click)="actualizar()" [disabled]="!registro.valid"
+                class="boton">Actualizar Documento</button>
+            <button *ngIf="data.estado == 3" type="button" (click)="replicar()" [disabled]="!registro.valid"
+                class="boton">Replicar Documento</button>
+        </div>
+    </form>
+</mat-card>

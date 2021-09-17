@@ -1,0 +1,15 @@
+<mat-tab-group (selectedIndexChange)="seleccionar($event)" mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4 mt-4">
+  <mat-tab label="Detalle">
+    <app-empleado *ngIf="empleado" [Empleado]="empleado"></app-empleado>
+  </mat-tab>
+  <mat-tab label="Usuario">
+    <app-usuario *ngIf="this.usuario" [Usuario]="usuario"></app-usuario>
+  </mat-tab>
+  <mat-tab label="Contacto">
+    <app-vista-lista-usuario-contacto
+    *ngIf="empleado"
+    [UsuarioContacto]="lista_contacto_usuario"
+    [UsuarioId]="empleado.id">
+  </app-vista-lista-usuario-contacto>
+  </mat-tab>
+</mat-tab-group>

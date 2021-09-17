@@ -1,0 +1,453 @@
+@import "~@angular/material/theming";
+
+@include mat-core();
+
+@import "src/app/shared/estilos/custom-colors.scss";
+
+$AdminMersur-primary: mat-palette($principal-color);
+$AdminMersur-danger: mat-palette($red-color);
+$AdminMersur-accent: mat-palette($principal-color, A700, A700, A700);
+
+// The warn palette is optional (defaults to red).
+$AdminMersur-warn: mat-palette($mat-red);
+
+$AdminMersur-theme: mat-light-theme(
+  (
+    color: (
+      primary: $AdminMersur-primary,
+      accent: $AdminMersur-accent,
+      warn: $AdminMersur-warn,
+      danger: $AdminMersur-danger,
+    ),
+  )
+);
+
+// Background
+$princial-background: mat-color($principal-color, 500);
+$green-400: mat-color($principal-color, 400);
+$green-600: mat-color($principal-color, 600);
+$green-700: mat-color($principal-color, 700);
+$green-800: mat-color($principal-color, 800);
+
+// Textos
+$grey-500: mat-color($gray-color, 500);
+$grey-400: mat-color($gray-color, 400);
+$grey-300: mat-color($gray-color, 300);
+
+@include angular-material-theme($AdminMersur-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+body::-webkit-scrollbar-track {
+  background: black;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: $princial-background;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0px;
+}
+
+h4 {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+// General
+.prlbackground {
+  background: $princial-background;
+}
+
+.header-form {
+  border-bottom: 3px solid $princial-background;
+}
+
+.separador {
+  border: 1px solid $princial-background;
+  margin: 15px 0px;
+}
+
+.contenedor {
+  width: 420px;
+}
+
+// label {
+//   font-size: 18px;
+//   font-weight: bold;
+//   margin-bottom: 15px;
+// }
+
+label {
+  font-size: 11px;
+  font-weight: normal;
+  margin: 0px;
+}
+
+tr.example-detail-row {
+  height: 0 !important;
+  border: none;
+}
+
+tr.example-element-row, tr.mat-footer-row{
+  height: 35px !important;
+  // border: 1px solid #e7e7e7;
+  // font-weight: bold;
+}
+
+td.mat-cell:last-of-type{
+  padding: 0px;
+  // border: 0.5px solid grey;
+}
+
+td.mat-cell:first-of-type{
+  padding: 0px;
+  // border: 0.5px solid grey;
+}
+
+mat-icon {
+  width: 36px !important;
+  height: 36px !important;
+  font-size: 36px !important;
+  line-height: 37px !important;
+}
+
+.icon-acciones {
+  width: 24px !important;
+  height: 24px !important;
+  font-size: 24px !important;
+  line-height: 24px !important;
+}
+
+.carta {
+  background: white;
+  border-radius: 15px 0px 0px 15px;
+  padding: 40px;
+}
+
+// Textos
+.txtcolor {
+  color: $princial-background;
+}
+
+.subtitulo {
+  color: $grey-500;
+}
+
+.resultado {
+  border: 1px solid $grey-300;
+  color: $grey-400;
+  font-weight: bold;
+  font-size: 13px;
+  border-radius: 8px;
+  padding: 10px;
+  width: 200px;
+}
+
+// Boton
+.boton {
+  color: white;
+  background: $green-800;
+  border: none;
+  box-shadow: -5px 5px 5px rgba($color: #000000, $alpha: 0.3);
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 15px 15px;
+
+  background-position: center;
+  transition: background 0.8s;
+}
+
+.boton:hover {
+  background-color: $green-400;
+  background-image: radial-gradient(circle, transparent 1%, $green-400 1%);
+  background-position: center;
+  background-size: 15000%;
+}
+
+.boton:active {
+  transition: background 0s;
+  background-color: #bde0b5;
+  background-size: 100%;
+}
+
+.boton:disabled {
+  background: #bde0b5;
+}
+
+// cards
+.card {
+  background: #d8d9da;
+  padding: 20px;
+}
+
+// combos box
+select {
+  //box-shadow: 0 10px 25px rgba($color: #000000, $alpha: 0.3);
+  border-radius: 8px;
+  padding: 7px;
+  font-size: 13px;
+  border: 1px solid #bde0b5;
+  outline: none;
+}
+
+.form-div {
+  position: relative;
+  cursor: pointer;
+  margin: 15px 0px;
+}
+
+.form-div:hover {
+  select {
+    outline: none;
+    border: 1px solid $princial-background;
+  }
+  .custom-arrow {
+    position: absolute;
+    border-radius: 8px;
+    bottom: 0px;
+    right: 0px;
+    display: block;
+    background: $princial-background;
+    height: 34px;
+    width: 37px;
+    pointer-events: none;
+  }
+
+  .custom-arrow-invalid {
+    position: absolute;
+    border-radius: 8px;
+    bottom: 24px;
+    right: 0px;
+    display: block;
+    background: $princial-background;
+    height: 34px;
+    width: 37px;
+    pointer-events: none;
+  }
+}
+
+.custom-arrow {
+  position: absolute;
+  border-radius: 8px;
+  bottom: 0px;
+  right: 0px;
+  display: block;
+  background: #bde0b5;
+  height: 34px;
+  width: 37px;
+  pointer-events: none;
+}
+
+.custom-arrow-invalid {
+  position: absolute;
+  border-radius: 8px;
+  bottom: 24px;
+  right: 0px;
+  display: block;
+  background: #bde0b5;
+  height: 34px;
+  width: 37px;
+  pointer-events: none;
+}
+
+.custom-arrow:hover,
+.custom-arrow-invalid:hover {
+  background: $princial-background;
+}
+
+.custom-arrow-invalid::before,
+.custom-arrow-invalid::after {
+  --size: 13px;
+  content: "";
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  left: 50%;
+  top: 55%;
+  transform: translate(-50%, -50%);
+}
+
+.custom-arrow::before,
+.custom-arrow::after {
+  --size: 13px;
+  content: "";
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  left: 50%;
+  top: 55%;
+  transform: translate(-50%, -50%);
+}
+
+.custom-arrow::before,
+.custom-arrow-invalid::before {
+  border-left: var(--size) solid transparent;
+  border-right: var(--size) solid transparent;
+  border-top: var(--size) solid white;
+}
+
+// Inputs
+.form-control {
+  font-size: 13px;
+}
+
+// Requirements Tramite
+.requirements {
+  align-items: initial !important;
+}
+
+.requirements-content {
+  background: #bde0b5;
+  border-radius: 8px;
+}
+
+.title-requirements {
+  text-align: center;
+  padding: 20px;
+  font-size: 18px;
+  color: white;
+  border-radius: 8px 8px 0px 0px;
+  font-weight: bold;
+  background: $princial-background;
+}
+
+.cabecera-requirements {
+  background: #bde0b5;
+
+  h3 {
+    margin: 20px 0px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+}
+
+.check-options {
+  border-bottom: 1px solid white;
+  margin: 20px;
+  padding: 18px 0px;
+  mat-checkbox,
+  #ck-opcion {
+    width: 200px;
+  }
+  #ck-opcion {
+    text-align: start;
+  }
+  label {
+    margin: 0px;
+  }
+}
+
+.info-extra {
+  background: #bde0b5;
+  border-radius: 8px;
+  padding: 15px;
+  height: fit-content;
+}
+
+// barra opciones
+.tipo {
+  padding: 14px 10px;
+  border-radius: 8px 0px 0px 8px;
+  color: white;
+  font-size: 14px;
+  background: #707172;
+}
+
+.opcion {
+  padding: 12px 10px;
+  font-size: 13px;
+  font-weight: bold;
+  border: 1px solid #bdbfc0;
+}
+
+.barra .opcion:last-child {
+  border: 1px solid #bdbfc0;
+  border-left: none;
+  border-radius: 0px 8px 8px 0px;
+}
+
+// tabla
+.table {
+  width: 80%;
+  margin: 20px auto;
+
+  thead th {
+    background-color: #7ac16a;
+    color: white;
+  }
+}
+
+.casillas {
+  height: 24px;
+}
+
+// Estilos botones
+.btn-compartir {
+  background-color: #b1844a !important;
+}
+
+.tabla-editar {
+  th {
+    background-color: #e1eefd !important;
+  }
+}
+
+.cabecera-tabla-editar {
+  th {
+    background-color: #4a9bb1 !important;
+  }
+}
+
+.btn-registro,
+.btn-editar {
+  background-color: #4a9bb1 !important;
+}
+
+.btn-eliminar,
+.btn-edicion {
+  background-color: #b14a4a !important;
+}
+
+.btn-exportar {
+  background-color: #6566b7 !important;
+}
+
+.btn-ruta {
+  background-color: #4a9bb1 !important;
+}
+
+.mat-expansion-panel-content > .mat-expansion-panel-body {
+  padding: 0 !important;
+}
+
+.custom_dialog {
+  .mat-dialog-content{
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .mat-dialog-actions{
+    background-color: #ffff;
+  }
+}
+
+.boton-personalizado{
+  background-color: #27891f;
+  color: white;
+}

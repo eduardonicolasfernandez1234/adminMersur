@@ -1,0 +1,48 @@
+<mat-card>
+    <app-header-form *ngIf="data.nuevo" titulo="REGISTRO PLATAFORMA CLIENTE"></app-header-form>
+    <app-header-form *ngIf="data.nuevo == false" titulo="ACTUALIZAR PLATAFORMA CLIENTE"></app-header-form>
+    <form [formGroup]="registro" #formDirective="ngForm" (submit)="registrar()">
+        <h2 class="subtitulo my-3">Contactos Logística</h2>
+        <div class="card my-4">
+            <div fxLayout="row" fxLayout.md="column" fxLayoutAlign="space-between center" fxLayoutGap="5%"
+                fxLayout.sm="column">
+                <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+                    <label>Nombre Plataforma:</label>
+                    <input type="text" class="form-control" placeholder="Ingersar nombre plataforma"
+                        formControlName="nombre_plataforma"
+                        [ngClass]="registro.get('nombre_plataforma').touched && !registro.get('nombre_plataforma').valid ? 'is-invalid' : ''" />
+                    <div class="invalid-feedback">El campo Nombre plataforma es requerido.</div>
+                </div>
+                <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+                    <label>Usuario:</label>
+                    <input type="text" class="form-control" placeholder="Ingersar usuario"
+                        formControlName="usuario"
+                        [ngClass]="registro.get('usuario').touched && !registro.get('usuario').valid ? 'is-invalid' : ''" />
+                    <div class="invalid-feedback">El campo Usuario es requerido.</div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayout.md="column" fxLayoutAlign="space-between center" fxLayoutGap="5%"
+                fxLayout.sm="column">
+                <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+                    <label>Contraseña:</label>
+                    <input type="text" class="form-control" placeholder="Ingersar contraseña"
+                        formControlName="password"
+                        [ngClass]="registro.get('password').touched && !registro.get('password').valid ? 'is-invalid' : ''" />
+                    <div class="invalid-feedback">El campo Contraseña es requerido.</div>
+                </div>
+                <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+                    <label>Token:</label>
+                    <input type="text" class="form-control" placeholder="Ingersar token" formControlName="token"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="separador"></div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <button *ngIf="data.nuevo" [disabled]="!registro.valid" type="submit" class="boton">Registrar</button>
+            <button *ngIf="data.nuevo == false" type="button" (click)="actualizar()" [disabled]="!registro.valid" class="boton">Actualizar</button>
+        </div>
+    </form>
+
+</mat-card>

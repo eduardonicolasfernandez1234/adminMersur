@@ -1,0 +1,30 @@
+<mat-card>
+    <mat-card-header>
+        <button class="boton btn-compartir" mat-raised-button [matMenuTriggerFor]="exportar">Compartir</button>
+        <mat-menu #exportar="matMenu" yPosition="above">
+        <button mat-menu-item>Compartir Email</button>
+        <button mat-menu-item>Compartir Mensaje</button>
+        </mat-menu>
+        <button class="boton btn-exportar" mat-raised-button>Exportar PDF</button>
+        <button (click)="edicion = !edicion" class="boton btn-edicion" mat-raised-button>Edición</button>
+        <button (click)="registrar()" class="boton btn-registro" mat-raised-button>Nuevo Registro</button>
+        <!-- <button class="boton btn-exportar" mat-raised-button>Exportar PDF</button> -->
+        <!-- <button (click)="registrar()" class="boton btn-registro" mat-raised-button>Nuevo Registro</button> -->
+    </mat-card-header>
+    <mat-card-content>
+        <div *ngIf="lista_comision_cliente.length > 0; else nohay">
+            <div *ngFor="let comision of lista_comision_cliente; let i = index;">
+                <app-cliente-comision
+                    [Comision]="comision" 
+                    [ClienteId]="clienteId"
+                    [Edicion]="edicion" 
+                    (estado)="verificar($event)"
+                ></app-cliente-comision>
+                <!-- <app-cliente-plataforma [Plataforma]="plataforma" [Edicion]="edicion" (estado)="verificar($event)"></app-cliente-plataforma> -->
+            </div>
+        </div>
+        <ng-template #nohay>
+            <app-no-lista [titulo]="NO_DATA"></app-no-lista>
+        </ng-template>
+    </mat-card-content>
+</mat-card>

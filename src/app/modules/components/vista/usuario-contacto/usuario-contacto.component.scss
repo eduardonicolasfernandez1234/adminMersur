@@ -1,0 +1,46 @@
+.table {
+    width: 80%;
+    margin: 20px auto;
+
+    thead th {
+        background-color: #7ac16a;
+        color: white;
+    }
+}
+
+.opciones{
+    display: flex;
+    justify-content: flex-end;
+    width: 80%;
+    margin: auto;
+}
+
+.table-child {
+    width: 100% !important;
+}
+
+
+.boton {
+    margin-right: 10px;
+    font-size: 12px;
+}
+
+.boton:last-child {
+    margin-right: 0px;
+}
+
+th {
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid #c9c9c9;
+    background: #e6fde1;
+}
+
+td {
+    font-size: 11px;
+    border: 1px solid #c9c9c9;
+}
+
+mat-icon{
+    font-size: 20px!important;
+}

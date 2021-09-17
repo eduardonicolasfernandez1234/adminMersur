@@ -1,0 +1,78 @@
+<mat-card>
+    <mat-card-header>
+        <button class="boton btn-compartir" mat-raised-button [matMenuTriggerFor]="exportar">Compartir</button>
+        <mat-menu #exportar="matMenu" yPosition="above">
+        <button mat-menu-item>Compartir Email</button>
+        <button mat-menu-item>Compartir Mensaje</button>
+        </mat-menu>
+        <button class="boton btn-exportar" mat-raised-button>Exportar PDF</button>
+        <button (click)="actualizar()" class="boton btn-edicion" mat-raised-button>Editar</button>
+    </mat-card-header>
+    <mat-card-content>
+        <table class="table table-hover table-sm table-bordered">
+            <thead>
+                <tr class="table-active">
+                    <th scope="col" colspan="3">DETALLE DEL PROVEEDOR</th>
+                </tr>
+            </thead>
+            <tbody>
+                <table class="table table-hover table-sm table-bordered table-child">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Id proveedor</th>
+                            <th scope="col">Razón Social</th>
+                            <th scope="col">Nit</th>
+                        </tr>
+                        <tr>
+                            <td *ngIf="proveedor.id">{{ proveedor.id}}</td>
+                            <td *ngIf="proveedor.id == null">Sin datos</td>
+                            <td *ngIf="proveedor.razon_social">{{ proveedor.razon_social }}</td>
+                            <td *ngIf="proveedor.razon_social == null">Sin datos</td>
+                            <td *ngIf="proveedor.nit">{{ proveedor.nit }}</td>
+                            <td *ngIf="proveedor.nit == null">Sin datos</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Agencia</th>
+                            <th scope="col">Tipo Proveedor</th>
+                            <th scope="col">Tipo Usuario</th>
+                        </tr>
+                        <tr>
+                            <td *ngIf="proveedor.agencia">{{ proveedor.agencia }}</td>
+                            <td *ngIf="proveedor.agencia == null">Sin datos</td>
+                            <td *ngIf="proveedor.tipo_proveedor">{{ proveedor.tipo_proveedor }}</td>
+                            <td *ngIf="proveedor.tipo_proveedor == null">Sin datos</td>
+                            <td>Proveedor</td>
+                        </tr>
+                        <tr class="table-active">
+                            <th scope="col" colspan="3">INFORMACIÓN USARIO</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">Ciudad</th>
+                            <th scope="col">Dirección</th>
+                            <th scope="col">Estado</th>
+                        </tr>
+                        <tr>
+                            <td *ngIf="proveedor.usuario.ciudad.nombre">{{ proveedor.usuario.ciudad.nombre }}</td>
+                            <td *ngIf="proveedor.usuario.ciudad.nombre == null">Sin datos</td>
+                            <td *ngIf="proveedor.usuario.direccion">{{ proveedor.usuario.direccion }}</td>
+                            <td *ngIf="proveedor.usuario.direccion == null">Sin datos</td>
+                            <td *ngIf="proveedor.usuario.estado">Activo</td>
+                            <td *ngIf="proveedor.usuario.estado == null">Deshabilitado</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Nombre de usuario</th>
+                            <th scope="col">Fecha de actualización</th>
+                            <th scope="col">Fecha de registro</th>
+                        </tr>
+                        <tr>
+                            <td *ngIf="proveedor.usuario.username">{{ proveedor.usuario.username }}</td>
+                            <td *ngIf="proveedor.usuario.username == null">Sin datos</td>
+                            <td>{{momentService.obtenerFormatoFecha(proveedor.updated_at.toString())}}</td>
+                            <td>{{momentService.obtenerFormatoFecha(proveedor.created_at.toString())}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </tbody>
+        </table>
+    </mat-card-content>
+</mat-card>

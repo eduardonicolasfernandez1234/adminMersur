@@ -1,0 +1,29 @@
+<mat-tab-group (selectedIndexChange)="seleccionar($event)" mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4 mt-4">
+  <mat-tab label="Detalle">
+    <app-cliente *ngIf="cliente" [Cliente]="cliente"></app-cliente>
+  </mat-tab>
+  <mat-tab label="Usuario">
+    <app-usuario *ngIf="this.usuario" [Usuario]="usuario"></app-usuario>
+  </mat-tab>
+  <mat-tab label="Contactos">
+    <app-vista-lista-cliente-contacto
+      *ngIf="cliente"
+      [ClienteContacto]="lista_cliente_contacto"
+      [ClienteId]="cliente.id">
+    </app-vista-lista-cliente-contacto>
+  </mat-tab>
+  <mat-tab label="Plataformas">
+    <app-vista-lista-cliente-plataforma
+      *ngIf="cliente"
+      [PlataformaContacto]="lista_cliente_plataforma"
+      [ClienteId]="cliente.id">
+    </app-vista-lista-cliente-plataforma>
+  </mat-tab>
+  <mat-tab label="Documentos">
+    <app-vista-lista-usuario-documento
+      *ngIf="cliente"
+      [DocumentoUsuario]="lista_documento_usuario"
+      [UsuarioId]="cliente.id">
+    </app-vista-lista-usuario-documento>
+  </mat-tab>
+</mat-tab-group>

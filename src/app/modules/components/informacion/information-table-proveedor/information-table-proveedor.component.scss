@@ -1,0 +1,31 @@
+mat-card-header{
+    justify-content: flex-end;
+    width: 80%;
+    margin: auto;
+}
+
+mat-card-content{
+    margin-top: 20px;
+}
+
+.table-child{
+    width: 100%!important;
+}
+
+.boton{
+    margin-right: 10px;
+    font-size: 12px;
+}
+
+.boton:last-child{
+    margin-right: 0px;
+}
+
+th{
+    font-size: 12px;
+    font-weight: 500;
+}
+
+td{
+    font-size: 11px;
+}

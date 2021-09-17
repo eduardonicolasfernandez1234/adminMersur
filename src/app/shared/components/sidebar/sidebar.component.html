@@ -1,0 +1,63 @@
+<!-- <div>
+    <div fxLayout="column" fxLayoutAlign="center center" class="w-100">
+      <div>
+        <img
+          id="img-perfil"
+          src="../../../../assets/images/profile/user.png"
+        />
+      </div>
+      <h2 class="titulo">Usuario Invitado</h2>
+      <h1 class="txtcolor subtitulo">ADMIN LEVEL 1</h1>
+    </div>
+    <mat-divider></mat-divider>
+    <ul>
+      <li>
+        <a></a>
+      </li>
+    </ul>
+  </div>
+
+  <mat-drawer-container autosize>
+    <mat-drawer #drawer2 mode="side">
+
+    </mat-drawer>
+  </mat-drawer-container>
+<div class="opciones">
+
+</div>
+
+<mat-nav-list>
+  <mat-selection-list class="option-btn" [multiple]="false">
+    <mat-list-option routerLinkActive="router-link-active">
+
+    </mat-list-option>
+  </mat-selection-list>
+</mat-nav-list>
+-->
+
+<div fxLayout="column" fxLayoutAlign="center center" class="perfil w-100">
+  <div>
+    <img id="img-perfil" src="../../../../assets/images/profile/user.png" />
+  </div>
+  <h2 class="titulo">Usuario Invitado</h2>
+  <h1 class="txtcolor subtitulo">ADMIN LEVEL 1</h1>
+</div>
+
+<mat-divider></mat-divider>
+<nav class="navbar">
+  <ul class="navbar-nav">
+    <li
+      [ngClass]="{ seleccion: option.selected == true }"
+      (click)="changeState(option)"
+      class="nav-item"
+      *ngFor="let option of this.optionService.getOpciones()"
+    >
+      <a
+        [ngClass]="{ 'seleccion-txt': option.selected == true }"
+        [routerLink]="[option.route]"
+        class="nav-link"
+        >{{ option.name }}</a
+      >
+    </li>
+  </ul>
+</nav>

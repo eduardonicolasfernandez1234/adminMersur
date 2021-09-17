@@ -1,0 +1,200 @@
+<mat-dialog-content>
+  <mat-card>
+    <app-header-form titulo="LISTADO DE CLIENTES"></app-header-form>
+    <div class="contenedor-tabla">
+      <div class="busqueda">
+        <div
+          fxLayout="row"
+          fxLayoutAlign="space-between center"
+          fxLayoutGap="5%"
+          fxLayout.sm="column"
+        >
+          <div
+            class="form-div w-100"
+            fxLayout="column"
+            fxLayoutAlign="space-between start"
+          >
+            <!-- <label>Cliente:</label> -->
+            <ng-autocomplete
+              class="form-div w-100"
+              [data]="lista_cliente_corta"
+              [searchKeyword]="'razon_social'"
+              [itemTemplate]="itemTemplate"
+              [notFoundTemplate]="notFoundTemplate"
+              (selected)="selectEvent($event, CLIENTE_RAZON)"
+              (inputCleared)="onClear($event, CLIENTE_RAZON)"
+              (inputChanged)="onChangeSearch($event, CLIENTE_RAZON)"
+              placeholder="Seleccionar Razón Social"
+            >
+            </ng-autocomplete>
+
+            <ng-template #itemTemplate let-item>
+              <a [innerHTML]="item.razon_social"></a>
+            </ng-template>
+
+            <ng-template #notFoundTemplate let-notFound>
+              <div [innerHTML]="notFound"></div>
+            </ng-template>
+          </div>
+
+          <div
+            class="form-div w-100"
+            fxLayout="column"
+            fxLayoutAlign="space-between start"
+          >
+            <!-- <label>Liquidador:</label> -->
+            <ng-autocomplete
+              class="form-div w-100"
+              [data]="lista_cliente_corta"
+              [searchKeyword]="'identificacion_tributaria'"
+              [itemTemplate]="itemTemplate2"
+              [notFoundTemplate]="notFoundTemplate2"
+              (selected)="selectEvent($event, CLIENTE_NIT)"
+              (inputCleared)="onClear($event, CLIENTE_NIT)"
+              (inputChanged)="onChangeSearch($event, CLIENTE_NIT)"
+              placeholder="Seleccionar Nit"
+            >
+            </ng-autocomplete>
+
+            <ng-template #itemTemplate2 let-item>
+              <a [innerHTML]="item.identificacion_tributaria"></a>
+            </ng-template>
+
+            <ng-template #notFoundTemplate2 let-notFound>
+              <div [innerHTML]="notFound"></div>
+            </ng-template>
+          </div>
+
+          <div
+            class="form-div"
+            fxLayout="column"
+            fxLayoutAlign="space-between start"
+          >
+            <button (click)="buscador(1)" type="button" class="boton">
+              Buscar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" *ngIf="listaClientes.length == 0">
+        <div class="card-body p-3 seccion-nodespacho">
+          <p class="mensaje-carga-lista">
+            Cargando el listado de clientes habilitados
+          </p>
+        </div>
+      </div>
+      <div
+        class="tabla-clientes"
+        (dblclick)="seleccionar()"
+        *ngIf="listaClientes.length > 0"
+      >
+        <div class="mat-elevation-z8 tabla">
+          <mat-table
+            #table
+            [dataSource]="dataSource"
+            matSort
+            multiTemplateDataRows
+          >
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>
+                Id.
+              </mat-header-cell>
+              <mat-cell *matCellDef="let cliente"> {{ cliente.id }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="razon_social">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>
+                Razón social.
+              </mat-header-cell>
+              <mat-cell *matCellDef="let cliente">
+                {{ cliente.razon_social }}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="identificacion_tributaria">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>
+                Identificación tributaria.
+              </mat-header-cell>
+              <mat-cell *matCellDef="let cliente">
+                {{ cliente.identificacion_tributaria }}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="representante_legal">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>
+                Representante Legal.
+              </mat-header-cell>
+              <mat-cell *matCellDef="let cliente">
+                <span *ngIf="cliente.representante_legal">{{
+                  cliente.representante_legal
+                }}</span>
+                <span *ngIf="cliente.representante_legal == null"
+                  >Sin Asignar</span
+                >
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="created_at">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>
+                Fecha de creación.
+              </mat-header-cell>
+              <mat-cell *matCellDef="let cliente">
+                {{
+                  momentService.obtenerFormatoFecha(
+                    cliente.created_at.toString()
+                  )
+                }}
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row
+              *matHeaderRowDef="displayedColumns"
+            ></mat-header-row>
+
+            <mat-row
+              *matRowDef="let row; columns: displayedColumns"
+              matRipple
+              class="element-row"
+              [ngClass]="{ selected: row === cliente }"
+              (click)="rowClick(row)"
+              (dblclick)="doubleClick(row)"
+            >
+            </mat-row>
+
+            <!-- <mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
+                        [@detailExpand]="row.element == expandedElement ? 'expanded' : 'collapsed'"
+                        style="overflow: hidden">
+                    </mat-row> -->
+
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">
+                No se encuentran resultados para "{{ input.value }}"
+              </td>
+            </tr>
+          </mat-table>
+          <mat-paginator
+            [length]="lengthTable"
+            [pageSize]="10"
+            [pageSizeOptions]="[5, 10, 25, 100]"
+            (page)="pageEvent = $event; onPaginateChange($event)"
+            showFirstLastButtons
+          ></mat-paginator>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </div>
+  </mat-card>
+</mat-dialog-content>
+<div class="group-btn" mat-dialog-actions>
+  <button mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
+  <button
+    mat-raised-button
+    class="boton-personalizado"
+    [disabled]="this.cliente == null"
+    (click)="seleccionar()"
+    cdkFocusInitial
+  >
+    Aceptar
+  </button>
+</div>

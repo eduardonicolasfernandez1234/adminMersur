@@ -1,0 +1,124 @@
+<mat-card>
+  <app-header-form *ngIf="!data.replica" titulo="ACTUALIZAR EMPELADO"></app-header-form>
+  <app-header-form *ngIf="data.replica" titulo="REPLICAR EMPELADO"></app-header-form>
+  <form [formGroup]="registro" #formDirective="ngForm" (submit)="actualizar()">
+    <!-- Informacion empleado -->
+    <div class="card my-4">
+      <div fxLayout="row" fxLayout.md="column" fxLayoutAlign="space-between center" fxLayoutGap="5%"
+        fxLayout.sm="column">
+        <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+          <label>Nombre completo:</label>
+          <input type="text" class="form-control" placeholder="Nombre completo" formControlName="nombre_completo"
+            [ngClass]="registro.get('nombre_completo').touched && !registro.get('nombre_completo').valid ? 'is-invalid' : ''" />
+          <div class="invalid-feedback">El campo Nombre completo es requerido.</div>
+        </div>
+        <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+          <label>CI:</label>
+          <input type="text" class="form-control" placeholder="Ingersar CI" formControlName="ci"
+            [ngClass]="registro.get('ci').touched && !registro.get('ci').valid ? 'is-invalid' : ''" />
+          <div class="invalid-feedback">El campo Ci es requerido.</div>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayout.md="column" fxLayoutAlign="space-between center" fxLayoutGap="5%"
+        fxLayout.sm="column">
+        <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+          <label>Fecha de Nacimiento:</label>
+          <input type="date" class="form-control" placeholder="Ingersar fecha" formControlName="fecha_nacimiento"
+            [ngClass]="registro.get('fecha_nacimiento').touched && !registro.get('fecha_nacimiento').valid ? 'is-invalid' : ''" />
+          <div class="invalid-feedback">El campo Fecha de nacimiento es requerido.</div>
+        </div>
+        <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+          <label>Nacionalidad:</label>
+          <input type="text" class="form-control" placeholder="Ingersar nacionalidad" formControlName="nacionalidad"
+            [ngClass]="registro.get('nacionalidad').touched && !registro.get('nacionalidad').valid ? 'is-invalid' : ''" />
+          <div class="invalid-feedback">El campo Nacionalidad es requerido.</div>
+        </div>
+        <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+          <label>Estado Civil:</label>
+          <input type="text" class="form-control" placeholder="Ingersar estado civil" formControlName="estado_civil"
+            [ngClass]="registro.get('estado_civil').touched && !registro.get('estado_civil').valid ? 'is-invalid' : ''" />
+          <div class="invalid-feedback">El campo Estado civil es requerido.</div>
+        </div>
+      </div>
+    </div>
+    <!-- Informacion usuario -->
+    <div class="separador"></div>
+    <div class="card my-5">
+      <div fxLayout="row" fxLayout.md="column" fxLayoutAlign="space-between center" fxLayoutGap="5%"
+        fxLayout.sm="column">
+        <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+          <label>Usuario:</label>
+          <input type="text" class="form-control" placeholder="Ingersar usuario" formControlName="username"
+            [ngClass]="registro.get('username').touched && !registro.get('username').valid ? 'is-invalid' : ''" />
+          <div class="invalid-feedback">El campo Usuario es requerido.</div>
+        </div>
+        <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+          <label>Contraseña:</label>
+          <input type="password" class="form-control" placeholder="Ingersar contraseña" formControlName="password"
+            [ngClass]="registro.get('password').touched && !registro.get('password').valid ? 'is-invalid' : ''" />
+          <div class="invalid-feedback">El campo Contraseña es requerido.</div>
+        </div>
+        <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+          <label>Dirección:</label>
+          <input type="text" class="form-control" placeholder="Ingersar dirección" formControlName="direccion"
+            [ngClass]="registro.get('direccion').touched && !registro.get('direccion').valid ? 'is-invalid' : ''" />
+          <div class="invalid-feedback">El campo Dirección es requerido.</div>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5%" fxLayout.sm="column">
+        <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+          <label>País:</label>
+          <select class="w-100" formControlName="pais"
+            [ngClass]="registro.get('pais').touched && !registro.get('pais').valid ? 'is-invalid' : ''"
+            (change)="seleccionPaisCiudad()">
+            <option disabled selected value="">Seleccionar país</option>
+            <option *ngFor="let pais of this.listaPais" [ngValue]="pais.id">
+              {{ pais.nombre }}
+            </option>
+          </select>
+          <span [ngClass]="registro.get('pais').touched && !registro.get('pais').valid ? 'custom-arrow-invalid' : 'custom-arrow'"></span>
+          <div class="invalid-feedback">El campo Pais es requerido.</div>
+        </div>
+        <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+          <label>Ciudad:</label>
+          <select class="w-100" formControlName="ciudad_id"
+            [ngClass]="registro.get('ciudad_id').touched && !registro.get('ciudad_id').valid ? 'is-invalid' : ''">
+            <option disabled selected value="">Seleccionar ciudad</option>
+            <option *ngFor="let ciudad of this.listaCiudad" [ngValue]="ciudad.id">
+              {{ ciudad.nombre }}
+            </option>
+          </select>
+          <span [ngClass]="registro.get('ciudad_id').touched && !registro.get('ciudad_id').valid ? 'custom-arrow-invalid' : 'custom-arrow'"></span>
+          <div class="invalid-feedback">El campo Ciudad es requerido.</div>
+        </div>
+      </div>
+    </div>
+    <!-- Medios de contactos -->
+    <!-- <div class="separador"></div>
+    <div class="card my-5">
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5%" fxLayout.sm="column">
+        <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+          <label>Medio de contacto:</label>
+          <select class="w-100">
+            <option value="">Seleccionar medio</option>
+          </select>
+          <span class="custom-arrow"></span>
+        </div>
+        <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+          <label>Valor:</label>
+          <input type="text" class="form-control" placeholder="Ingersar valor" />
+        </div>
+        <div class="form-div" fxLayout="column" fxLayoutAlign="center end">
+          <button class="boton">Agregar Medio</button>
+        </div>
+      </div>
+    </div> -->
+    <div class="separador"></div>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <mat-checkbox formControlName="interno">Interno</mat-checkbox>
+      <button *ngIf="!data.replica" [disabled]="!registro.valid" class="boton">Actualizar Registro</button>
+      <button *ngIf="data.replica" type="button" (click)="replicar()" [disabled]="!registro.valid" class="boton">Replicar</button>
+    </div>
+  </form>
+  </mat-card>

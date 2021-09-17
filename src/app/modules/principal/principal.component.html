@@ -1,0 +1,50 @@
+<meta name="google" content="notranslate" />
+<div class="contenedor" div fxLayout="row" fxLayoutAlign=" none">
+  <div class="iconos">
+    <mat-list class="pt-0">
+      <mat-list-item id="sidebar-btn">
+        <mat-icon *ngIf="!showFiller" (click)="showSideNav()" mat-list-icon
+          >arrow_back_ios</mat-icon
+        >
+        <mat-icon *ngIf="showFiller" (click)="showSideNav()" mat-list-icon
+          >arrow_forward_ios</mat-icon
+        >
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item
+        [ngClass]="{ seleccion: icon.selected == true }"
+        class="icon-content"
+        (click)="cambio(icon)"
+        *ngFor="let icon of this.optionService.getIconos()"
+      >
+        <mat-icon  [ngClass]="{ 'seleccion-txt': icon.selected == true }" class="nav-icons" mat-list-icon>{{ icon.name }}</mat-icon>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <mat-drawer-container>
+    <mat-drawer #drawer mode="side" [opened]="sideBarOpen">
+      <app-sidebar></app-sidebar>
+    </mat-drawer>
+    <mat-drawer-content class="pr-0 prlbackground">
+      <app-header></app-header>
+      <main [@routeAnimations]="prepareRoute(outlet)">
+        <router-outlet #outlet="outlet"></router-outlet>
+      </main>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>
+
+<!--<mat-drawer-container fxHide.md fxHide.lg fxHide.xl [hasBackdrop]="true">
+  <mat-drawer #drawer mode="over" [opened]="sideBarOpen">
+    <app-sidebar></app-sidebar>
+  </mat-drawer>
+  <mat-drawer-content class="prlbackground">
+    <button id="fabicon" mat-mini-fab color="primary" (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <app-header></app-header>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>-->
+

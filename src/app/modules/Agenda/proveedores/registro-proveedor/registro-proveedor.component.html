@@ -1,0 +1,106 @@
+<div class="carta">
+  <app-header-form titulo="REGISTRO DE PROVEEDORES"></app-header-form>
+  <div>
+    <form [formGroup]="registro" #formDirective="ngForm" (submit)="registrar()">
+      <!-- Informacion proveedor -->
+      <div class="card my-4">
+        <h2 class="subtitulo">Datos del proveedor</h2>
+        <div fxLayout="row" fxLayout.md="column" fxLayoutAlign="space-between center" fxLayoutGap="5%"
+          fxLayout.sm="column">
+          <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+            <label>Razón Social:</label>
+            <input type="text" class="form-control" placeholder="Ingersar razón" formControlName="razon_social"
+              [ngClass]="registro.get('razon_social').touched && !registro.get('razon_social').valid ? 'is-invalid' : ''" />
+            <div class="invalid-feedback">El campo Razón social es requerido.</div>
+          </div>
+          <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+            <label>Agencia:</label>
+            <input type="text" class="form-control" placeholder="Ingersar agencia" formControlName="agencia"
+              [ngClass]="registro.get('agencia').touched && !registro.get('agencia').valid ? 'is-invalid' : ''" />
+            <div class="invalid-feedback">El campo Agencia es requerido.</div>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayout.md="column" fxLayoutAlign="space-between center" fxLayoutGap="5%"
+          fxLayout.sm="column">
+          <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+            <label>Tipo Proveedor:</label>
+            <input type="text" class="form-control" placeholder="Ingersar tipo" formControlName="tipo_proveedor"
+              [ngClass]="registro.get('tipo_proveedor').touched && !registro.get('tipo_proveedor').valid ? 'is-invalid' : ''" />
+            <div class="invalid-feedback">El campo Tipo proveedor es requerido.</div>
+          </div>
+          <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+            <label>NIT:</label>
+            <input type="text" class="form-control" placeholder="Ingersar NIT" formControlName="nit"
+              [ngClass]="registro.get('nit').touched && !registro.get('nit').valid ? 'is-invalid' : ''" />
+            <div class="invalid-feedback">El campo Nit es requerido.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Informacion usuario -->
+      <div class="separador"></div>
+      <div class="card my-5">
+        <h2 class="subtitulo">Datos del usuario</h2>
+        <div fxLayout="row" fxLayout.md="column" fxLayoutAlign="space-between center" fxLayoutGap="5%"
+          fxLayout.sm="column">
+          <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+            <label>País:</label>
+            <select class="w-100" formControlName="pais"
+              [ngClass]="registro.get('pais').touched && !registro.get('pais').valid ? 'is-invalid' : ''"
+              (change)="seleccionPaisCiudad()">
+              <option disabled selected value="">Seleccionar país</option>
+              <option *ngFor="let pais of this.listaPais" [ngValue]="pais.id">
+                {{ pais.nombre }}
+              </option>
+            </select>
+            <span [ngClass]="registro.get('pais').touched && !registro.get('pais').valid ? 'custom-arrow-invalid' : 'custom-arrow'"></span>
+            <div class="invalid-feedback">El campo Pais es requerido.</div>
+          </div>
+          <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+            <label>Ciudad:</label>
+            <select class="w-100" formControlName="ciudad_id"
+              [ngClass]="registro.get('ciudad_id').touched && !registro.get('ciudad_id').valid ? 'is-invalid' : ''">
+              <option disabled selected value="">Seleccionar ciudad</option>
+              <option *ngFor="let ciudad of this.listaCiudad" [ngValue]="ciudad.id">
+                {{ ciudad.nombre }}
+              </option>
+            </select>
+            <span [ngClass]="registro.get('ciudad_id').touched && !registro.get('ciudad_id').valid ? 'custom-arrow-invalid' : 'custom-arrow'"></span>
+            <div class="invalid-feedback">El campo Ciudad es requerido.</div>
+          </div>
+          <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+            <label>Dirección:</label>
+            <input type="text" class="form-control" placeholder="Ingersar dirección" formControlName="direccion"
+              [ngClass]="registro.get('direccion').touched && !registro.get('direccion').valid ? 'is-invalid' : ''" />
+            <div class="invalid-feedback">El campo Direccion es requerido.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Medios de contactos -->
+      <!-- <div class="separador"></div>
+      <div class="card my-5">
+        <h2 class="subtitulo">Contacto usuario</h2>
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5%" fxLayout.sm="column">
+          <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+            <label>Medio de contacto:</label>
+            <select class="w-100">
+              <option value="">Seleccionar medio</option>
+            </select>
+            <span class="custom-arrow"></span>
+          </div>
+          <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+            <label>Valor:</label>
+            <input type="text" class="form-control" placeholder="Ingersar valor" />
+          </div>
+          <div class="form-div" fxLayout="column" fxLayoutAlign="center end">
+            <button class="boton">Agregar Medio</button>
+          </div>
+        </div>
+      </div> -->
+      <div class="separador"></div>
+      <div fxLayout="row" fxLayoutAlign="end center">
+        <button [disabled]="!registro.valid" class="boton">Guardar Registro</button>
+      </div>
+    </form>
+  </div>
+</div>

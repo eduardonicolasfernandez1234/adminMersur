@@ -1,0 +1,85 @@
+<mat-card>
+    <mat-card-header>
+        <button class="boton btn-compartir" mat-raised-button [matMenuTriggerFor]="exportar">Compartir</button>
+        <mat-menu #exportar="matMenu" yPosition="above">
+        <button mat-menu-item>Compartir Email</button>
+        <button mat-menu-item>Compartir Mensaje</button>
+        </mat-menu>
+        <button class="boton btn-exportar" mat-raised-button>Exportar PDF</button>
+        <button (click)="actualizar()" class="boton btn-edicion" mat-raised-button>Editar</button>
+    </mat-card-header>
+    <mat-card-content>
+        <table class="table table-hover table-sm table-bordered">
+            <thead>
+                <tr class="table-active">
+                    <th scope="col" colspan="3">DETALLE DEL EMPLEADO</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <table class="table table-hover table-sm table-bordered table-child">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Id Empleado</th>
+                            <th scope="row">Nombre Completo</th>
+                            <th scope="col">CI</th>
+                            
+                        </tr>
+                        <tr>
+                            <td *ngIf="empleado.id">{{ empleado.id}}</td>
+                            <td *ngIf="empleado.id == null">Sin datos</td>
+                            <td *ngIf="empleado.nombre_completo">{{ empleado.nombre_completo }}</td>
+                            <td *ngIf="empleado.nombre_completo == null">Sin datos</td>
+                            <td *ngIf="empleado.ci">{{ empleado.ci }}</td>
+                            <td *ngIf="empleado.ci == null">Sin datos</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Nacionalidad</th>
+                            <th scope="col">Estado Civil</th>
+                            <th scope="col">Interno</th>
+                        </tr>
+                        <tr>
+                            <td *ngIf="empleado.nacionalidad">{{ empleado.nacionalidad }}</td>
+                            <td *ngIf="empleado.nacionalidad == null">Sin datos</td>
+                            <td *ngIf="empleado.estado_civil">{{ empleado.estado_civil }}</td>
+                            <td *ngIf="empleado.estado_civil == null">Sin datos</td>
+                            <td *ngIf="empleado.interno == true">Si</td>
+                            <td *ngIf="empleado.interno == false">No</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2" scope="col">Fecha Nacimiento</th>
+                            <td *ngIf="empleado.fecha_nacimiento">{{ empleado.fecha_nacimiento }}</td>
+                            <td *ngIf="empleado.fecha_nacimiento == null">Sin datos</td>
+                        </tr>
+                        <tr class="table-active">
+                            <th scope="col" colspan="3">INFORMACIÓN USARIO</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">Nombre de usuario</th>
+                            <th scope="col">Dirección</th>
+                            <th scope="col">Ciudad</th>
+                        </tr>
+                        <tr>
+                            <td>{{ empleado.usuario.username }}</td>
+                            <td *ngIf="empleado.usuario.direccion">{{ empleado.usuario.direccion }}</td>
+                            <td *ngIf="empleado.usuario.direccion == null">Sin datos</td>
+                            <td>{{ empleado.usuario.ciudad.nombre }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Fecha de actualización</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Tipo Usuario</th>
+                        </tr>
+                        <tr>
+                            <td>{{momentService.obtenerFormatoFecha(empleado.updated_at.toString())}}</td>
+                            <td *ngIf="empleado.usuario.estado">Activo</td>
+                            <td *ngIf="empleado.usuario.estado == null">Deshabilitado</td>
+                            <td>Empleado</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </tbody>
+        </table>
+
+    </mat-card-content>
+</mat-card>

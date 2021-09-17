@@ -1,0 +1,63 @@
+<mat-card>
+    <app-header-form *ngIf="data.nuevo" titulo="REGISTRO CONTACTO CLIENTE"></app-header-form>
+    <app-header-form *ngIf="data.nuevo == false" titulo="ACTUALIZAR CONTACTO CLIENTE"></app-header-form>
+    <form [formGroup]="registro" #formDirective="ngForm" (submit)="registrar()">
+        <h2 class="subtitulo my-3">Contactos Logística</h2>
+        <div class="card my-4">
+            <div fxLayout="row" fxLayout.md="column" fxLayoutAlign="space-between center" fxLayoutGap="5%"
+                fxLayout.sm="column">
+                <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+                    <label>Nombre Completo:</label>
+                    <input type="text" class="form-control" placeholder="Ingersar nombre completo"
+                        formControlName="nombre_completo"
+                        [ngClass]="registro.get('nombre_completo').touched && !registro.get('nombre_completo').valid ? 'is-invalid' : ''" />
+                    <div class="invalid-feedback">El campo Nombre completo es requerido.</div>
+                </div>
+                <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+                    <label>Tipo Contacto:</label>
+                    <select class="w-100" formControlName="tipo"
+                        [ngClass]="registro.get('tipo').touched && !registro.get('tipo').valid ? 'is-invalid' : ''">
+                        <option disabled selected value="">Seleccionar Tipo Contacto</option>
+                        <option value="1"> Gerente general </option>
+                        <option value="2"> Responsable comex </option>
+                        <option value="3"> Responsable contable </option>
+                        <option value="4"> Responsable almacen </option>
+                    </select>
+                    <span
+                        [ngClass]="registro.get('tipo').touched && !registro.get('tipo').valid ? 'custom-arrow-invalid' : 'custom-arrow'"></span>
+                    <div class="invalid-feedback">El campo Tipo Contacto es requerido.</div>
+                </div>
+                <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+                    <label>Email:</label>
+                    <input type="email" class="form-control" placeholder="Ingersar email"
+                        formControlName="email"
+                        [ngClass]="registro.get('email').touched && !registro.get('email').valid ? 'is-invalid' : ''" />
+                    <div class="invalid-feedback">El campo Email es requerido.</div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayout.md="column" fxLayoutAlign="space-between center" fxLayoutGap="5%"
+                fxLayout.sm="column">
+                <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+                    <label>Telefono:</label>
+                    <input type="text" class="form-control" placeholder="Ingersar telefono" formControlName="telefono"
+                        [ngClass]="registro.get('telefono').touched && !registro.get('telefono').valid ? 'is-invalid' : ''" />
+                    <div class="invalid-feedback">El campo Telefono es requerido.</div>
+                </div>
+                <div class="form-div w-100" fxLayout="column" fxLayoutAlign="space-between start">
+                    <label>Acceso CRM:</label>
+                    <input type="text" class="form-control" placeholder="Ingersar acceso crm" formControlName="acceso_crm"
+                        [ngClass]="registro.get('acceso_crm').touched && !registro.get('acceso_crm').valid ? 'is-invalid' : ''" />
+                    <div class="invalid-feedback">El campo Acceso CRM es requerido.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="separador"></div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <button *ngIf="data.nuevo" [disabled]="!registro.valid" type="submit" class="boton">Registrar</button>
+            <button *ngIf="data.nuevo == false" type="button" (click)="actualizar()" [disabled]="!registro.valid" class="boton">Actualizar</button>
+        </div>
+    </form>
+
+</mat-card>

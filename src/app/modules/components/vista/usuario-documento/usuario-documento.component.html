@@ -1,0 +1,64 @@
+<div class="opciones" *ngIf="edicion">
+    <button matTooltip="Exportar" [ngClass]="{'btn-exportar': edicion == true}" mat-icon-button class="boton">
+        <mat-icon>archive</mat-icon>
+    </button>
+    <button matTooltip="Eliminar" (click)="eliminar()" [ngClass]="{'btn-eliminar': edicion == true}" mat-icon-button class="boton">
+        <mat-icon>delete</mat-icon>
+    </button>
+
+    <button matTooltip="Editar" (click)="actualizar()" [ngClass]="{'btn-editar': edicion == true}" mat-icon-button class="boton">
+        <mat-icon>create</mat-icon>
+    </button>
+</div>
+
+<table class="table table-hover table-sm table-bordered">
+    <thead>
+        <tr [ngClass]="{'cabecera-tabla-editar': edicion == true}"  class="table-active">
+            <th [ngClass]="{'btn-editar': edicion == true}" scope="col" colspan="3">DOCUMENTOS USUARIO</th>
+        </tr>
+    </thead>
+    <tbody>
+        <table class="table table-hover table-sm table-bordered table-child">
+            <tbody>
+                <tr [ngClass]="{'tabla-editar': edicion == true}" class="table-active">
+                    <th scope="row">Id</th>
+                    <th scope="row">Tipo Documento</th>
+                    <th scope="col">Nombre Documento</th>
+                </tr>
+                <tr>
+                    <td>{{ documento.id }}</td>
+                    <td *ngIf="documento.tipo">{{ obtenerTipoDocumento(documento.tipo) }}</td>
+                    <td *ngIf="documento.tipo == null">Sin datos</td>
+                    <td *ngIf="documento.valor">{{ documento.valor }}</td>
+                    <td *ngIf="documento.valor == null">Sin datos</td>
+                </tr>
+                <tr [ngClass]="{'tabla-editar': edicion == true}">
+                    <th scope="col">Fecha de vencimiento del documento</th>
+                    <th scope="col">Fecha de registro</th>
+                    <th scope="col">Fecha de modificación</th>
+                </tr>
+                <tr>
+                    <td *ngIf="documento.fecha_documento">{{ momentService.obtenerFormatoFecha(documento.fecha_documento.toString()) }}</td>
+                    <td *ngIf="documento.fecha_documento == null">Sin datos</td>
+                    <td *ngIf="documento.created_at">{{ momentService.obtenerFormatoFecha(documento.created_at.toString()) }}</td>
+                    <td *ngIf="documento.created_at == null">Sin datos</td>
+                    <td *ngIf="documento.updated_at">{{ momentService.obtenerFormatoFecha(documento.updated_at.toString()) }}</td>
+                    <td *ngIf="documento.updated_at == null">No asignado</td>
+                </tr>
+                <tr [ngClass]="{'tabla-editar': edicion == true}">
+                    <th (click)="visualizar = !visualizar" colspan="3" scope="col">
+                        <button matTooltip="Visualizar Documento" [ngClass]="{'btn-exportar': edicion == true}" mat-raised-button class="boton">
+                            Visualizar Documento
+                        </button>
+                    </th>
+                </tr>
+                <tr>
+                </tr>
+            </tbody>
+        </table>
+    </tbody>
+</table>
+
+<div *ngIf="visualizar">
+    <app-pdf-viewer [DocumentoUsuario]="documento"></app-pdf-viewer>
+</div>

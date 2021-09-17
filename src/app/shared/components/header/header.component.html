@@ -1,0 +1,40 @@
+<div class="mb-4" fxLayout="row" fxLayoutAlign="space-between center" >
+  <div>
+    <img id="logo" src="../../../../assets/images/header/logo.png" />
+  </div>
+  <div class="options-header">
+    <button
+    matBadge="{{ this.notificacion.obtenerCantidadNot() }}"
+    [matBadgeHidden]="this.notificacion.obtenerCantidadNot() == 0"
+    matBadgeColor="danger"
+    mat-icon-button
+    [matMenuTriggerFor]="belowMenu"
+    class="icon-header"
+  >
+    <mat-icon>notifications_active</mat-icon>
+  </button>
+    <mat-menu #belowMenu="matMenu" xPosition="before">
+      <!-- <button
+      mat-menu-item
+      [ngClass]="{ cambioestadofalse: not.visto == true }"
+      [routerLink]="'/principal/'+not.url"
+      *ngFor="let not of this.listaNotificaciones"
+      (click)="actualizarVisto(not)"
+    >
+      <div *ngIf="not.empleado_notifico != null">
+        <span>Te notificó: {{ not.empleado_notifico.nombre_completo }} </span>
+      </div>
+    </button> -->
+    <div style="margin: 10px;">
+      <span>Sin notificaciones... </span>
+    </div>
+    </mat-menu>
+
+    <button class="icon-header" mat-icon-button [matMenuTriggerFor]="belowMenu2">
+      <mat-icon>engineering</mat-icon>
+    </button>
+    <mat-menu #belowMenu2="matMenu" xPosition="before">
+      <button (click)="desconectar()" mat-menu-item>Cerrar Sesión</button>
+    </mat-menu>
+  </div>
+</div>

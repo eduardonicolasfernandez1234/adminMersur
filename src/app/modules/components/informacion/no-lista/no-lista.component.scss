@@ -1,0 +1,22 @@
+.img-novalid {
+    width: 80%;
+    margin: 20px auto;
+
+    div {
+        width: 200px;
+        margin: auto;
+        margin-top: 20px;
+    }
+
+    img {
+        display: block;
+        width: 200px;
+        border-radius: 50%;
+    }
+}
+
+h1 {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 30px;
+}
